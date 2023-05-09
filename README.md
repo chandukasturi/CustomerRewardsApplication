@@ -4,7 +4,7 @@ A retailer offers a rewards program to its customers awarding points based on ea
 Ex: for a $120 purchase, the customer receives
 (120 - 50) x 1 + (120 - 100) x 1 = 90 points
 
-Created a REST API Endpoint that calculates and returns the reward points using Java, SpringBoot and H2 in-memory database
+Created a REST API Endpoint that calculates and returns the reward points.The applicaiton is built using Java, SpringBoot and H2 in-memory database
 
 The package name is structured as com.reward.spring
 Used H2 in-memory database as the backend storage.
