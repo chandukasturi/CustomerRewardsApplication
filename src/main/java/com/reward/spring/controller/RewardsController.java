@@ -2,6 +2,7 @@ package com.reward.spring.controller;
 
 
 import com.reward.spring.entity.Customer;
+import com.reward.spring.exception.CustomerNotFoundException;
 import com.reward.spring.model.Rewards;
 import com.reward.spring.repository.CustomerRepository;
 import com.reward.spring.service.RewardsService;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 @RequestMapping({"/customer"})
 public class RewardsController {
@@ -31,10 +31,10 @@ public class RewardsController {
             produces = {"application/json"}
     )
     @ResponseBody
-    public ResponseEntity<Rewards> getRewardsByCustomerId(@PathVariable("customerId") Long customerId) {
+    public ResponseEntity<Rewards> getRewardsByCustomerId(@PathVariable("customerId") Long customerId) throws CustomerNotFoundException {
         Optional<Customer> customer = this.customerRepository.findById(customerId);
         if (customer.isEmpty()) {
-            throw new RuntimeException("Invalid customer ID!! Try again with a valid customer ID ");
+            throw new CustomerNotFoundException("Invalid customer ID");
         } else {
             Rewards customerRewards = this.rewardsService.getRewardsByCustomerId(customerId);
             return new ResponseEntity(customerRewards, HttpStatus.OK);

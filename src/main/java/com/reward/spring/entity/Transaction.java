@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(
@@ -15,13 +16,10 @@ import java.sql.Timestamp;
 )
 public class Transaction {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
-    @Column(
-            name = "T_ID"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "T_ID")
     private long transactionId;
+
     @Column(
             name = "C_ID"
     )
@@ -68,5 +66,20 @@ public class Transaction {
 
     public void setTransactionDate(Timestamp transactionDate) {
         this.transactionDate = transactionDate;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return transactionId == that.transactionId &&
+                customerId == that.customerId &&
+                Double.compare(that.transactionAmount, transactionAmount) == 0 &&
+                Objects.equals(transactionDate, that.transactionDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, transactionId, transactionAmount, transactionDate);
     }
 }

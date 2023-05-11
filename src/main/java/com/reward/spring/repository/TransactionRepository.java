@@ -14,4 +14,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     List<Transaction> findAllByCustomerId(Long customerId);
 
     List<Transaction> findAllByCustomerIdAndTransactionDateBetween(Long customerId, Timestamp from, Timestamp to);
+
+    List<Transaction> findByCustomerId(Long customerId);
 }

@@ -7,6 +7,14 @@ public class Rewards {
     private long secondMonthRewards;
     private long thirdMonthRewards;
 
+    public Rewards(long customerId, long totalRewards, long firstMonthRewards, long secondMonthRewards, long thirdMonthRewards) {
+        this.customerId = customerId;
+        this.totalRewards = totalRewards;
+        this.firstMonthRewards = firstMonthRewards;
+        this.secondMonthRewards = secondMonthRewards;
+        this.thirdMonthRewards = thirdMonthRewards;
+    }
+
     public Rewards() {
     }
 
