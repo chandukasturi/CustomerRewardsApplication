@@ -2,6 +2,7 @@ package com.reward.spring.service;
 
 import com.reward.spring.entity.Transaction;
 import com.reward.spring.exception.CustomerNotFoundException;
+import com.reward.spring.repository.CustomerRepository;
 import com.reward.spring.repository.TransactionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,17 +21,20 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class TransactionServiceTest {
+class TransactionServiceImplTest {
 
     @Mock
     private TransactionRepository transactionRepository;
 
-    private TransactionService transactionService;
+    @Mock
+    private CustomerRepository customerRepository;
+
+    private TransactionServiceImpl transactionService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        transactionService = new TransactionService(transactionRepository);
+        transactionService = new TransactionServiceImpl(transactionRepository,customerRepository);
     }
 
     @Test
